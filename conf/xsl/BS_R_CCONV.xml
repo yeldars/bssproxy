@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:x="BS_R_CCONV" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:template match="/">
+    <xsl:for-each select="x:BSMessage">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exp="http://bus.colvir.com/exp" xmlns:data="http://bus.colvir.com/exp/data">
+  <soapenv:Header/>
+   <soapenv:Body>    
+                        <capReq xmlns="http://bus.colvir.com/module/service/cap/types" capType="FINA" version="1.0">
+                                   <header>
+                                               <extId> <xsl:value-of select="@ID"/></extId>
+                                               <extDt><xsl:value-of select="@ReqDateTime"/></extDt>
+                                               <channel><xsl:value-of select="BSHead/@SubSys"/></channel>
+                                               <lang>en</lang>
+                                   </header>
+                                   <body>
+                                               <trnType>3008</trnType>
+                                               
+                                               <dscr>BSS_CCONV</dscr>
+                                               <idnType>IBN</idnType>
+                                               <idnCode><xsl:value-of select="BSRequest/@ACD"/></idnCode>
+                                               <idnType2>IBN</idnType2>
+                                              
+                                               <idnCode2><xsl:value-of select="BSRequest/@ACC"/></idnCode2>
+                                   
+                                   
+                                               <cur><xsl:value-of select="BSRequest/@CURD"/></cur>
+                                              <amount><xsl:value-of select="BSRequest/@AD"/></amount>
+                                               <!-- <cur2>USD</cur2>
+                                               <amount2><xsl:value-of select="BSRequest/@AC"/></amount2>-->
+                                               <xData>
+                                                           <trn>   
+                  <bss>
+                  <curd><xsl:value-of select="BSRequest/@CURD"/></curd>
+                  <curc><xsl:value-of select="BSRequest/@CURC"/></curc>
+                  <d><xsl:value-of select="BSRequest/@D"/></d>
+                  <n><xsl:value-of select="BSRequest/@N"/></n>
+                  <ad><xsl:value-of select="BSRequest/@AD"/></ad>
+                  <ac><xsl:value-of select="BSRequest/@AC"/></ac>
+                  <rate><xsl:value-of select="BSRequest/@RATE"/></rate>
+                  <acd><xsl:value-of select="BSRequest/@ACD"/></acd>
+                  <racc><xsl:value-of select="BSRequest/@ACC"/></racc>
+                  <pname><xsl:value-of select="BSRequest/@PNAME"/></pname>
+                  <pinn><xsl:value-of select="BSRequest/@PINN"/></pinn>
+                  <customerid><xsl:value-of select="BSHead/@CustomerID"/></customerid>
+
+                 
+                  <!--<addinfo><xsl:for-each select="BSRequest/ADDITIONAL"><xsl:value-of select="@ABSFIELDID"/><xsl:text>=&gt;</xsl:text><xsl:value-of select="@FIELDVALUE"/><xsl:text>,</xsl:text></xsl:for-each></addinfo>-->
+                  </bss>                                                                  
+                                                           </trn>
+                                               </xData>
+                                   </body>
+                        </capReq>
+</soapenv:Body>
+</soapenv:Envelope>
+            </xsl:for-each>
+  </xsl:template>
+</xsl:stylesheet>

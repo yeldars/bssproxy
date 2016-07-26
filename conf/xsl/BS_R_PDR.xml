@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:x="BS_R_PDR" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:template match="/" xmlns:utils="kz.bssproxy.extend.XSLUtils">
+    <xsl:for-each select="x:BSMessage">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exp="http://bus.colvir.com/exp" xmlns:data="http://bus.colvir.com/exp/data">
+  <soapenv:Header/>
+   <soapenv:Body>    
+                        <capReq xmlns="http://bus.colvir.com/module/service/cap/types" capType="FINA" version="1.0">
+                                   <header>
+                                               <extId> <xsl:value-of select="@ID"/></extId>
+                                               <extDt><xsl:value-of select="@ReqDateTime"/></extDt>
+                                               <channel><xsl:value-of select="BSHead/@SubSys"/></channel>
+                                               <lang>en</lang>
+                                   </header>
+                                   <body>                                               
+                                               <dscr>BSS_PDR</dscr>
+                                               <idnType>IBN</idnType>
+                                               <idnCode><xsl:value-of select="BSRequest/@PACC"/></idnCode> 
+                                               <cur>KZT</cur>
+                                               <amount><xsl:value-of select="BSRequest/@A"/></amount>											   
+                                               <xsl:choose>
+                                               <xsl:when test="BSRequest/@RBBIK = 'ATYNKZKA' ">                                                    
+                                               <idnCode2><xsl:value-of select="BSRequest/@RACC"/></idnCode2>  
+                                               <idnType2>IBN</idnType2>                                     
+                                               <trnType>3012</trnType>                                                            
+                                               </xsl:when>
+                                               <xsl:otherwise>
+                                               <trnType>3013</trnType>
+									  <amountCms><xsl:value-of select="BSRequest/@COMISSION"/></amountCms>
+                                               </xsl:otherwise>
+                                               </xsl:choose>  
+										   
+                                               <xData>
+                                                           <trn>   
+                  <bss>
+                  <n><xsl:value-of select="BSRequest/@N"/></n>
+                  <pacc><xsl:value-of select="BSRequest/@PACC"/></pacc>
+                  <racc><xsl:value-of select="BSRequest/@RACC"/></racc>                  
+                  <paypurp><xsl:value-of select="BSRequest/PAYPURP"/></paypurp>
+                  <rbbik><xsl:value-of select="BSRequest/@RBBIK"/></rbbik>
+                  <rkpp><xsl:value-of select="BSRequest/@RKPP"/></rkpp>
+                  <rname><xsl:value-of select="BSRequest/@RNAME"/></rname>
+                  <rinn><xsl:value-of select="BSRequest/@RINN"/></rinn>
+                  <pcardm><xsl:value-of select="BSRequest/@PCARDM"/></pcardm>
+                  <knp><xsl:value-of select="BSRequest/@KNP"/></knp>                  
+                  </bss>                                                                  
+                                                           </trn>
+                                               </xData>
+                                   </body>
+                        </capReq>
+</soapenv:Body>
+</soapenv:Envelope>
+            </xsl:for-each>
+  </xsl:template>
+</xsl:stylesheet>
