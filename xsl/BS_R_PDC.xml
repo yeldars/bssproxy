@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:x="BS_R_PDC" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:template match="/">
+    <xsl:for-each select="x:BSMessage">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exp="http://bus.colvir.com/exp" xmlns:data="http://bus.colvir.com/exp/data">
+  <soapenv:Header/>
+   <soapenv:Body>    
+                        <capReq xmlns="http://bus.colvir.com/module/service/cap/types" capType="FINA" version="1.0">
+                                   <header>
+                                               <extId> <xsl:value-of select="@ID"/></extId>
+                                               <extDt><xsl:value-of select="@ReqDateTime"/></extDt>
+                                               <channel><xsl:value-of select="BSHead/@SubSys"/></channel>
+                                               <lang>en</lang>
+                                   </header>
+                                   <body>
+                                              
+                                   
+                                               <xData>
+                                                           <trn>   
+                  <bss>				  
+                  <n><xsl:value-of select="BSRequest/@N"/></n>
+                  <cur><xsl:value-of select="BSRequest/@CUR"/></cur>
+                  <crd><xsl:value-of select="BSRequest/@CRD"/></crd>
+                  <d><xsl:value-of select="BSRequest/@D"/></d>
+                  <a><xsl:value-of select="BSRequest/@A"/></a>
+                  <pname><xsl:value-of select="BSRequest/@PNAME"/></pname>
+                  <pacc><xsl:value-of select="BSRequest/@PACC"/></pacc>
+                  <pidn><xsl:value-of select="BSRequest/@PIDN"/></pidn>
+                  <pbbik><xsl:value-of select="BSRequest/@PBBIK"/></pbbik>
+                  <pbca><xsl:value-of select="BSRequest/@PBCA"/></pbca>
+                  <pbtyp><xsl:value-of select="BSRequest/@PBTYP"/></pbtyp>
+                  <pbbt><xsl:value-of select="BSRequest/@PBBT"/></pbbt>
+                  <pbp><xsl:value-of select="BSRequest/@PBP"/></pbp>
+                  <rname><xsl:value-of select="substring(BSRequest/@RNAME,1,70)"/></rname>
+                  <racc><xsl:value-of select="BSRequest/@RACC"/></racc>
+                  <rbname><xsl:value-of select="BSRequest/@RBNAME"/></rbname>
+                  <rbp><xsl:value-of select="BSRequest/@RBP"/></rbp>
+                  <bbccode><xsl:value-of select="BSRequest/@BBCCODE"/></bbccode>
+                  <rbbswift><xsl:value-of select="BSRequest/@RBBSWIFT"/></rbbswift>
+                  <bbswift><xsl:value-of select="BSRequest/@BBSWIFT"/></bbswift>
+                  <bbca><xsl:value-of select="BSRequest/@BBCA"/></bbca>
+                  <bbname><xsl:value-of select="BSRequest/@BBNAME"/></bbname>
+                  <bbp><xsl:value-of select="BSRequest/@BBP"/></bbp>
+                  <bbaddr><xsl:value-of select="substring(BSRequest/@BBADDR,1,50)"/></bbaddr>
+                  <kbe><xsl:value-of select="BSRequest/@KBE"/></kbe>
+                  <knp><xsl:value-of select="BSRequest/@KNP"/></knp>                           
+                  <rccode><xsl:value-of select="BSRequest/@RCCODE"/></rccode>
+                  <rp><xsl:value-of select="BSRequest/@RP"/></rp>
+                  <raddr><xsl:value-of select="substring(BSRequest/@RADDR,1,50)"/></raddr>
+                  <rbccode><xsl:value-of select="BSRequest/@RBCCODE"/></rbccode>
+                  <rbaddr><xsl:value-of select="substring(BSRequest/@RBADDR,1,50)"/></rbaddr>
+                  <commission><xsl:value-of select="BSRequest/@COMMISSION"/></commission>
+                  <cacc><xsl:value-of select="BSRequest/@CACC"/></cacc>
+                  <customerid><xsl:value-of select="BSHead/@CustomerID"/></customerid>                  
+				  <paypurp><xsl:value-of select="BSRequest/PAYPURP"/></paypurp>
+                  </bss>                                                                  
+                                                           </trn>
+                                               </xData>
+                                                                                   
+                                               
+                                               <dscr>BSS_CCONV</dscr>
+                                               <idnType>IBN</idnType>
+                                               <idnCode><xsl:value-of select="BSRequest/@PACC"/></idnCode>
+                                               <cur><xsl:value-of select="BSRequest/@CUR"/></cur>
+                                               <amount><xsl:value-of select="BSRequest/@A"/></amount>
+                                               <idnCode2><xsl:value-of select="BSRequest/@RACC"/></idnCode2>  
+                                               <idnType2>IBN</idnType2>                                     
+                                               <trnType>3014</trnType>                                                            
+                                               <!-- <cur2>USD</cur2>
+                                               <amount2><xsl:value-of select="BSRequest/@AC"/></amount2>-->
+
+                                   </body>
+                        </capReq>
+</soapenv:Body>
+</soapenv:Envelope>
+            </xsl:for-each>
+  </xsl:template>
+</xsl:stylesheet>

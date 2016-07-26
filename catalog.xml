@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://alax190:8080/colvir-cap-service/SOAPService?wsdl" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/alax190_8080/colvir-cap-service/SOAPService.wsdl"/>
+    <system systemId="http://alax190:8080/colvir-cap-service/SOAPService?xsd=colvir-cap-service-2.14.0.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/alax190_8080/colvir-cap-service/SOAPService.xsd_colvir-cap-service-2.14.0.xsd"/>
+</catalog>
