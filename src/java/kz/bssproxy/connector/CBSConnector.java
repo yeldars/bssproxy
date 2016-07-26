@@ -18,8 +18,19 @@ import kz.bssproxy.config.BSSProxyConfig;
  
 public class CBSConnector {
  
+
+ 
 	public static void main(String[] argv) {
  
+//		try {
+// 
+//                        
+// 
+//		} catch (SQLException e) {
+// 
+//			System.out.println(e.getMessage());
+// 
+//		}
  
 	}
  

@@ -35,6 +35,7 @@ import org.w3c.dom.NodeList;
 public class Way4DBClient {
     
     
+
         
 public static Connection getDBConnection() {
  
@@ -389,8 +390,9 @@ public static String getCardIbanDB(String cardN) throws SQLException {
 				body += "<D"
                                         + " D=\"" + rs.getString("POSTING_DATE") +"\""
                                         + " PD=\"" + rs.getString("POSTING_DATE") +"\""
-                                        + " PA=\"" + rs.getString("AMOUNT") +"\""
-                                        + " CUR=\""+XSLUtils.CurrCode2ISO(rs.getString("TRANS_CURRENCY"))+"\" \n"
+                                        + " PA=\"" + rs.getString("TRANS_AMOUNT") +"\""
+                                        //+ " CUR=\""+XSLUtils.CurrCode2ISO(rs.getString("TRANS_CURRENCY"))+"\" \n"
+                                        + " CUR=\""+rs.getString("TRANS_CURRENCY")+"\" \n"
                                         + " A=\"" + rs.getString("AMOUNT") +"\""
                                         + " REF=\"" + rs.getString("RET_REF_NUMBER") +"\""
                                         + " GND=\""+ XSLUtils.escapeHTML(rs.getString("STMT_DETAILS")) +"\" \n"

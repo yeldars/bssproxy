@@ -2,7 +2,6 @@
 <xsl:stylesheet xmlns:x="BS_R_PDR" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:template match="/" xmlns:utils="kz.bssproxy.extend.XSLUtils">
     <xsl:for-each select="x:BSMessage">
-    <xsl:variable name="accExists" select="utils:accExists(BSRequest/@RACC)"/>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exp="http://bus.colvir.com/exp" xmlns:data="http://bus.colvir.com/exp/data">
   <soapenv:Header/>
    <soapenv:Body>    
@@ -27,11 +26,11 @@
                                                </xsl:when>
                                                <xsl:otherwise>
                                                <trnType>3013</trnType>
+											   <cur>KZT</cur>
+												<amountCms><xsl:value-of select="BSRequest/@COMMIS"/>200</amountCms>
                                                </xsl:otherwise>
                                                </xsl:choose>  
-
-											   
-
+										   
                                                <xData>
                                                            <trn>   
                   <bss>

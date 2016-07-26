@@ -229,6 +229,8 @@ HttpsURLConnection con = (HttpsURLConnection)myurl.openConnection();
 
 con.setRequestMethod("POST");
 
+con.setConnectTimeout(120000);
+
 con.setRequestProperty("Content-length", String.valueOf(req.length())); 
 con.setRequestProperty("Content-Type","application/x-www-form-urlencoded; charset=utf-8"); 
 con.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0;Windows98;DigExt)"); 
