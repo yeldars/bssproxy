@@ -6,9 +6,9 @@
         <xsl:attribute name="ID">
           <xsl:value-of select="soap:Body/ns3:capRes/ns3:header/ns3:capId"/>
         </xsl:attribute>
+        <BSHead CustomerID="BSS_CUSTOMER_ID" OutSysID="InvoRetail" ABSMessage="">
                 <xsl:choose> 
                       <xsl:when test="soap:Body/ns3:capRes/ns3:header/ns3:errCode != '0'">
-					<BSHead CustomerID="BSS_CUSTOMER_ID" OutSysID="InvoRetail" ABSMessage="">
                         <xsl:attribute name="ABSMessage">
                         <xsl:value-of select="concat('Ошибка обработки платежа: ',soap:Body/ns3:capRes/ns3:header/ns3:errCode)"/>
                         </xsl:attribute>                      					  
@@ -19,45 +19,31 @@
                             </xsl:attribute>                                  
                           </m>
                         </Errors>
-					</BSHead>
-					<BSAnswer>
-					  <xsl:attribute name="REF">
-						<xsl:value-of select="soap:Body/ns3:capRes/ns3:header/ns3:capId"/>
-					  </xsl:attribute>
-					</BSAnswer>
                       </xsl:when> 
-					<xsl:when test="soap:Body/ns3:capRes/ns3:header/ns3:capId">		
-					<BSHead CustomerID="BSS_CUSTOMER_ID" OutSysID="InvoRetail" ABSMessage="">					
+					<xsl:when test="soap:Body/ns3:capRes/ns3:header/ns3:capId">					  					  
                         <xsl:attribute name="ABSMessage">						
-                        <xsl:text>Принято для обработки/Processing</xsl:text>						
+                        <xsl:text>Документ успешно обработан в банке</xsl:text>						
 						</xsl:attribute>
                         <Errors>
                           <m l="0" t="0" c="0" e="" s="0"/>
-                        </Errors>
-					</BSHead>
-					<BSAnswer>
-					  <xsl:attribute name="Status">
-						<xsl:text>17011</xsl:text>						
-					  </xsl:attribute>						
-					  <xsl:attribute name="REF">
-						<xsl:value-of select="soap:Body/ns3:capRes/ns3:header/ns3:capId"/>
-					  </xsl:attribute>
-					</BSAnswer>					
+                        </Errors>				
 					</xsl:when> 
                     <xsl:otherwise>
-					<BSHead CustomerID="BSS_CUSTOMER_ID" OutSysID="InvoRetail" ABSMessage="">
                         <Errors>
                           <m l="0" t="0" c="BS:2" s="0" e="Internal Error">
                           </m>
                         </Errors>	
-					</BSHead>	
-					<BSAnswer>
-					  <xsl:attribute name="REF">
-						<xsl:value-of select="soap:Body/ns3:capRes/ns3:header/ns3:capId"/>
-					  </xsl:attribute>
-					</BSAnswer>					
                     </xsl:otherwise>
                 </xsl:choose>
+        </BSHead>
+        <BSAnswer>
+          <xsl:attribute name="REF">
+            <xsl:value-of select="soap:Body/ns3:capRes/ns3:header/ns3:capId"/>
+          </xsl:attribute>
+          <xsl:attribute name="Status">						                        
+		    <xsl:text>17041</xsl:text>						
+		</xsl:attribute>
+        </BSAnswer>
       </x:BSMessage>
     </xsl:for-each>
   </xsl:template>

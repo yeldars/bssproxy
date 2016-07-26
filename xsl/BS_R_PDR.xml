@@ -26,8 +26,7 @@
                                                </xsl:when>
                                                <xsl:otherwise>
                                                <trnType>3013</trnType>
-											   <cur>KZT</cur>
-												<amountCms><xsl:value-of select="BSRequest/@COMMIS"/>200</amountCms>
+									  <amountCms><xsl:value-of select="BSRequest/@COMISSION"/></amountCms>
                                                </xsl:otherwise>
                                                </xsl:choose>  
 										   
