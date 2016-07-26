@@ -42,7 +42,11 @@ public class CapConnector {
           
 
          
+         //URL url = new URL("http://172.27.149.34:8181/cxf/SOAPService");         
          URL url = new URL(BSSProxyConfig.getInstance().getCapUrl());        
+         //URL url = new URL("http://172.30.124.191:8181/cxf/SOAPService");
+         //URL url = new URL("http://172.30.121.190:8080/colvir-cap-service/SOAPService");
+         //URL url = new URL("http://172.27.129.101:8080/colvir-cap-service/SOAPService");         
          HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
          urlConn.setDoInput (true);
          urlConn.setConnectTimeout(300);

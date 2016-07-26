@@ -232,7 +232,7 @@ con.setRequestMethod("POST");
 con.setConnectTimeout(120000);
 
 con.setRequestProperty("Content-length", String.valueOf(req.length())); 
-con.setRequestProperty("Content-Type","application/x-www-form-urlencoded; charset=utf-8"); 
+con.setRequestProperty("Content-Type","application/xml; charset=utf-8"); 
 con.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0;Windows98;DigExt)"); 
 con.setRequestProperty("OperationType", Integer.toString(operation)); 
 String pwd = new String(Base64.encode((group+'|'+terminal+':'+password).getBytes()));
@@ -243,33 +243,64 @@ con.setDoInput(true);
 
 try (DataOutputStream output = new DataOutputStream(con.getOutputStream())) {
     output.writeBytes(req);
+    output.flush();
+    output.close();
 }
 
-StringBuffer inputLine; 
-        try (DataInputStream input = new DataInputStream( con.getInputStream() )) {
-            inputLine = new StringBuffer();
-            String tmp;
-            while(input.available()>0)
-            {
-                // reads characters encoded with modified UTF-8
-                inputLine.append(input.readUTF());
-                
-                // print
-                
-            }  while (null != (tmp = input.readLine())) {            
-             inputLine.append(tmp);
-             //System.out.println(tmp);
-         }
-        } 
+// (ЕЛЬДАР 2015 12 29)ЭТА ХРЕНЬ ПОСЛЕ ПРОФ РАБОТ В КЦМР НЕ РАБОТАЕТ
+//StringBuffer inputLine; 
+//inputLine = new StringBuffer();
+//
+//        try (DataInputStream input = new DataInputStream( con.getInputStream() )) {
+//            
+//            String tmp;
+//            System.err.println("Start Reading");
+//            while(input.available()>0)
+//            {
+//                // reads characters encoded with modified UTF-8
+//                inputLine.append(input.readUTF());
+//                System.err.println("Readed" + inputLine);
+//                
+//                // print
+//                
+//            }
+//            
+//            while (null != (tmp = input.readLine())) {            
+//             inputLine.append(tmp);
+//             //System.out.println(tmp);
+//         }
+//        } catch (EOFException e) {
+//            
+//            System.err.println("EOF"+inputLine);
+//            System.err.println("ERR = ");            
+//            e.printStackTrace();
+//            } 
+// (ЕЛЬДАР 2015 12 29)ЭТА ХРЕНЬ ПОСЛЕ ПРОФ РАБОТ В КЦМР НЕ РАБОТАЕТ
 
-            System.err.println(inputLine);
-            InsertXMLLog(inputLine.toString(),"0","PUPAY","APLAT_RES",1);
+
+//Новый метод
+            BufferedReader in = new BufferedReader(
+                                    new InputStreamReader(con.getInputStream()));
+                            String inputLine;
+                            StringBuilder response = new StringBuilder();
+
+                            while ((inputLine = in.readLine()) != null) {
+                                    response.append(inputLine);
+                            }
+                            in.close();
+
+            System.out.println(response.toString());
+            
+//Новый метод            
+            //System.err.println(inputLine);
+            
+            InsertXMLLog(response.toString(),"0","PUPAY","APLAT_RES",1);
             
             Document dom;            
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             XPath xPath = XPathFactory.newInstance().newXPath();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            dom = db.parse(new InputSource(new ByteArrayInputStream(inputLine.toString().getBytes())));
+            dom = db.parse(new InputSource(new ByteArrayInputStream(response.toString().getBytes())));
             Element doc = dom.getDocumentElement();            
             
             String status = "9999";
