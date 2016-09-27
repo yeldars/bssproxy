@@ -27,7 +27,7 @@ w4user=*******
 w4password==*******
 w4procgetcontract=bwx.opt_spm.kansas_get_contracts
 w4procgetstmt=bwx.opt_spm.kansas_get_stmt
-w4allowcreditlist=532456,542364,543271,520376,515453,536532,517327,547414
+w4allowcreditlist=58888,38888
 w4uterminal=00000099
 
 capurl=http://*******:8181/cxf/SOAPService
