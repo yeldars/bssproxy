@@ -11,7 +11,7 @@ aplatterminalpassword=*******
 aplatonlinecheckurl=http://91.195.226.47/GetUaRequest2/
 
 cbsdbdriver=oracle.jdbc.driver.OracleDriver
-cbsjdbc=jdbc:oracle:thin:@10.201.1.70:1521:****
+cbsjdbc=jdbc:oracle:thin:@10.****:1521:****
 cbsuser=IE_****
 cbspassword=**************
 
